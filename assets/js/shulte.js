@@ -68,7 +68,15 @@ function createHintElement(containerId) {
   const boardSurface = grid.closest('.board-surface');
   if (!boardSurface) return null;
 
-  const hintParent = grid.closest('.shulte-grid-panel') || boardSurface;
+  let hintParent = null;
+  const customTargetId = grid.dataset.hintTarget;
+  if (customTargetId) {
+    hintParent = document.getElementById(customTargetId);
+  }
+
+  if (!hintParent) {
+    hintParent = grid.closest('.shulte-grid-panel') || boardSurface;
+  }
   if (!hintParent) return null;
 
   let hint = hintParent.querySelector('.shulte-hint');
@@ -79,10 +87,14 @@ function createHintElement(containerId) {
       <div class="shulte-hint-label">Найдите и нажмите на цифру:</div>
       <div class="shulte-hint-number">1</div>
     `;
-    if (grid.parentElement === hintParent) {
+  }
+
+  const shouldInsertBeforeGrid = hintParent.contains(grid) && grid.parentElement === hintParent;
+  if (hint.parentElement !== hintParent) {
+    if (shouldInsertBeforeGrid) {
       hintParent.insertBefore(hint, grid);
     } else {
-      hintParent.insertBefore(hint, hintParent.firstChild);
+      hintParent.appendChild(hint);
     }
   }
   return hint;
@@ -271,6 +283,22 @@ function finishGame() {
       alert(`Первая таблица завершена! Время: ${time} сек. Начинается вторая таблица с видео.`);
       showSecondTableForTest();
     }, 300);
+  } else if (_gridId === 'shulteGridSecond') {
+    alert(`Готово! Время: ${time} сек`);
+    _start = 0;
+    _expected = 1;
+    _currentTable = 1;
+    setTimeout(() => {
+      window.location.href = 'test.html';
+    }, 400);
+  } else if (_gridId === 'shulteGridRepeatSecond') {
+    alert(`Готово! Время: ${time} сек`);
+    _start = 0;
+    _expected = 1;
+    _currentTable = 1;
+    setTimeout(() => {
+      window.location.href = 'results.html';
+    }, 400);
   } else {
     alert(`Готово! Время: ${time} сек`);
     _start = 0;

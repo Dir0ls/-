@@ -8,6 +8,10 @@
 </head>
 <body>
   <header class="main-header">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="Логотип Ингибитор" class="brand-logo">
+      <span class="brand-title">Ингибитор</span>
+    </a>
     <nav class="nav-container">
       <a href="index.html" class="nav-item">Главная</a>
       <a href="diagnostics.html" class="nav-item">Диагностика</a>
@@ -53,14 +57,18 @@
 
     <section class="exercise-shell exercise-shell--advanced" id="repeat-exercise-second" style="display:none;">
       <div class="board-surface board-surface--split">
-        <div class="shulte-video-box shulte-video-box--media">
-          <video autoplay muted loop playsinline controls>
-            <source src="assets/video/1v.mp4" type="video/mp4">
-            Ваш браузер не поддерживает видео.
-          </video>
+        <div class="shulte-split-column">
+          <div id="hintSlotRepeatSecond" class="shulte-hint-slot"></div>
+          <div class="shulte-video-box shulte-video-box--media">
+            <video autoplay muted loop playsinline controls>
+              <source src="assets/video/1v.mp4" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
+          </div>
         </div>
         <div class="shulte-grid-panel">
           <div id="shulteGridRepeatSecond" class="shulte-grid" aria-label="Вторая таблица повторной диагностики"
+            data-hint-target="hintSlotRepeatSecond"
             data-placeholder="Нажмите «Старт», чтобы продолжить контрольное прохождение"></div>
         </div>
       </div>
